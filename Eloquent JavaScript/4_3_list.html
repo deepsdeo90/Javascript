@@ -1,0 +1,65 @@
+<!--
+         Author: Dipali Suranwanshi
+         Date: 12/21/2017
+         Write a function arrayToList that builds up a data structure like the
+		previous one when given [1, 2, 3] as argument,
+
+		, and write a listToArray function that produces an array from a list.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+var arrayToList =function(inputArray){
+	/*var list ={
+		value:inputArray[0],
+		rest:{
+			value:inputArray[1],
+			rest:{
+				value:inputArray[2],
+				rest:null
+			}
+		}
+	}*/
+	var list =null;
+	for(var i=inputArray.length-1;i>=0;i--){
+		list={value:inputArray[i],rest:list};
+	}
+	return list;
+}
+var listToArray = function(list){
+	var array = [];
+	for(var node=list;node;node=node.rest){
+		array.push(node.value);
+	}
+	return array;
+}
+var prepend = function(list,value){
+	return {value:value,rest:list}
+}
+var nth= function(list,number){
+	if(!list){
+		return undefined;
+
+	}
+	else if(number==0){
+		return list.value;
+	}
+	else{
+		return nth(list.rest,number-1)
+	}
+}
+console.log(arrayToList([1,2,3]));
+var list = arrayToList([1,2,3]);
+console.log(listToArray(list));
+var newlist = prepend(list,10);
+console.log(newlist);
+console.log(listToArray(newlist));
+console.log(nth(newlist, 2));
+</script>
+</body>
+</html>
+
